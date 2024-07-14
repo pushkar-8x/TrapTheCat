@@ -1,10 +1,8 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Cat
+namespace TrapTheCat
 {
-
-
     public class HexTile : MonoBehaviour
     {
         public Vector2Int gridPosition;

@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Cat
+namespace TrapTheCat
 {
 
     public class GameManager : MonoBehaviour
@@ -15,13 +15,17 @@ namespace Cat
         public bool isGameOver { get; private set; }
         void Awake()
         {
+            if(Instance == null)
             Instance = this;
+            else
+                Destroy(Instance);
         }
 
-        public void GameOver()
+        public void GameOver(string goText)
         {
             isGameOver = true;
             gameOverText.gameObject.SetActive(true);
+            gameOverText.text = goText;
         }
 
         public void UpdateCatPath()

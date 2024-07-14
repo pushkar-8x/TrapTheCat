@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cat
+namespace TrapTheCat
 {
     public class CatController : MonoBehaviour
     {
@@ -25,7 +25,7 @@ namespace Cat
             if (currentTile.isCornerTile)
             {
                 Debug.Log("Escaped !");
-                GameManager.Instance.GameOver();
+                GameManager.Instance.GameOver("Oops ! The Cat has escaped !!");
                 currentTile.SetColor(Color.green);
                 return;
             }
@@ -33,6 +33,7 @@ namespace Cat
             List<HexTile> path = AStarPathfinding.FindPath(currentTile, targetTile, gridManager);
             currentTile.hasCat = false;
             //ClearPathHighlights();
+            
 
             if (path != null && path.Count > 0)
             {
@@ -54,6 +55,11 @@ namespace Cat
                     HexTile nextTile = neighbors[Random.Range(0, neighbors.Count)];
                     currentTile = nextTile;
                     transform.position = nextTile.transform.position;
+                }
+                else
+                {
+                    currentTile.SetColor(Color.red);
+                    GameManager.Instance.GameOver("Cat got trapped !!");
                 }
             }
         }

@@ -1,17 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace Cat
+namespace TrapTheCat
 {
 
     public class GridManager : MonoBehaviour
     {
-        public GameObject hexTilePrefab;
-        public int gridWidth;
-        public int gridHeight;
-        public float hexTileSize;
-        public float spacing; // New variable for spacing between tiles
-        public int nonWalkableTileCount;
+        [SerializeField] private GameObject hexTilePrefab;
+        [SerializeField] private int gridWidth;
+        [SerializeField] private int gridHeight;
+        [SerializeField] private float hexTileSize;
+        [SerializeField] private float spacing; // New variable for spacing between tiles
+        [SerializeField] private int nonWalkableTileCount;
         private Dictionary<Vector2Int, HexTile> grid;
 
         void Awake()

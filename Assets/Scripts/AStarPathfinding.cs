@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cat
+namespace TrapTheCat
 {
     public class AStarPathfinding
     {
@@ -80,20 +80,16 @@ namespace Cat
         public static List<HexTile> GetNeighbors(HexTile tile, GridManager gridManager)
         {
             List<HexTile> neighbors = new List<HexTile>();
-            Vector2Int[] directions = new Vector2Int[]
-            {
-            new Vector2Int(1, 0),
-            new Vector2Int(-1, 0),
-            new Vector2Int(0, 1),
-            new Vector2Int(0, -1),
-            //new Vector2Int(1, 1),
-            //new Vector2Int(-1, -1),
-        
-            };
 
-            foreach (var direction in directions)
+            Vector2Int[] neighborOffsets = tile.gridPosition.x % 2 == 0 ?
+                new Vector2Int[] { new Vector2Int(1, 0), new Vector2Int(1, -1), new Vector2Int(0, -1), new Vector2Int(-1, -1), new Vector2Int(-1, 0), new Vector2Int(0, 1) } :
+                new Vector2Int[] { new Vector2Int(1, 0), new Vector2Int(1, 1), new Vector2Int(0, 1), new Vector2Int(-1, 1), new Vector2Int(-1, 0), new Vector2Int(0, -1) };
+
+            foreach (var offset in neighborOffsets)
             {
-                HexTile neighbor = gridManager.GetTileAtPosition(tile.gridPosition + direction);
+                Vector2Int neighborPos = tile.gridPosition + offset;
+                HexTile neighbor = gridManager.GetTileAtPosition(neighborPos);
+
                 if (neighbor != null)
                 {
                     neighbors.Add(neighbor);
